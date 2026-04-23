@@ -119,6 +119,27 @@ GROUP BY z1.county;
 -- Market Capitalization and Demographic Reach Analysis - Analysis for Investment opportunities, buy&sell opportunities
 
 
+SELECT DISTINCT(type) FROM listings1
+WHERE type NOT IN ('farm', 'land', 'coop', 'other');
+-- Home types
+
+SELECT 	l1.type, 
+		l1.list_price, 
+		l1.sqft, 
+        l1.price_per_sqft,
+        z1.zip, 
+        z1.county,
+        z1.latitude,
+        z1.longtitude
+FROM listings1 AS l1
+JOIN zip1 AS z1 
+	ON l1.zip = z1.zip
+WHERE list_price IS NOT NULL
+	AND type NOT IN ('farm', 'land', 'coop', 'other')
+ORDER BY type ASC, list_price DESC;
+-- price_list and location per type
+
+
 
 
 
