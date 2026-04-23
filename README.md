@@ -21,7 +21,7 @@ I established a **one-to-many relationship** branching from the `zip` table to t
 
 ## 🗺️ Relational Schema
 
-
+<img width="100%" alt="w_Relational Schema Diagram" src="https://github.com/Galtaire/Project-Washington/blob/8ba3fd00d9b3e9d97bf10a09e7cc86f8f7d6b953/w_Relational%20Schema%20Diagram.png" />
 
 ---
 
