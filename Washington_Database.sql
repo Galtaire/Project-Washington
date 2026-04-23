@@ -137,6 +137,25 @@ FROM checker
 WHERE rownum > 2;
 -- Checking for Duplicate Listings
 
+UPDATE listings1  
+SET type = 'Single Family' 
+WHERE type = 'single_family';
+
+UPDATE listings1  
+SET type = 'Mobile' 
+WHERE type = 'mobile';
+
+UPDATE listings1  
+SET type = 'Townhome' 
+WHERE type = 'townhomes';
+
+UPDATE listings1  
+SET type = 'Condominium' 
+WHERE type = 'condo';
+
+UPDATE listings1  
+SET type = 'Multi-Family' 
+WHERE type = 'multi_family';
 
 ###### VIEWS - PowerBI
 
@@ -243,9 +262,26 @@ JOIN zip1 AS z1 ON l1.zip = z1.zip
 WHERE l1.last_sold_price IS NOT NULL 
   AND l1.type NOT IN ('farm', 'land', 'coop', 'other')
 GROUP BY z1.county;
--- Market Capitalization and Demographic Reach Analysis - Analysis for Investment opportunities, buy&sell opportunities
 
+CREATE OR REPLACE VIEW v_home_type AS
+SELECT DISTINCT(type) FROM listings1
+WHERE type NOT IN ('farm', 'land', 'coop', 'other');
+-- Home types
 
-
+CREATE OR REPLACE VIEW v_list_price_per_type AS
+SELECT 	l1.type, 
+		l1.list_price, 
+		l1.sqft, 
+        l1.price_per_sqft,
+        z1.zip, 
+        z1.county,
+        z1.latitude,
+        z1.longtitude
+FROM listings1 AS l1
+JOIN zip1 AS z1 
+	ON l1.zip = z1.zip
+WHERE list_price IS NOT NULL
+	AND type NOT IN ('farm', 'land', 'coop', 'other')
+ORDER BY type ASC, list_price DESC;
 
 
